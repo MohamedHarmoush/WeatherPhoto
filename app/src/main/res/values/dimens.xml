@@ -1,3 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="height_photo">300dp</dimen>
+    <dimen name="size_no_data_iv">250dp</dimen>
+    <dimen name="txt_size_25sp">25sp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
 </resources>

@@ -1,7 +1,11 @@
 package com.harmoush.photoweather.utils
 
+import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 
 /*
@@ -26,4 +30,24 @@ fun View?.toast(message: String) {
     this?.let {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
+}
+
+fun View.hide(visibility: Int = View.GONE) {
+    this.visibility = visibility
+}
+
+fun View.show() {
+    visibility = View.VISIBLE
+}
+
+@BindingAdapter("imageUrl", "placeholder", requireAll = false)
+fun ImageView.loadImage(
+    imageUrl: String?,
+    placeholderDrawable: Drawable? = null
+) {
+    Glide.with(this)
+        .load(imageUrl)
+        .placeholder(placeholderDrawable)
+        .error(placeholderDrawable)
+        .into(this)
 }

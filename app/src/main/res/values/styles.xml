@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="materialCardViewStyle">@style/CustomCardViewStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,4 +17,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
+    <style name="CustomCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceOverlay</item>
+    </style>
+
+    <style name="CustomShapeAppearanceOverlay" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">6dp</item>
+        <item name="cornerSizeTopRight">40dp</item>
+        <item name="cornerSizeBottomLeft">40dp</item>
+        <item name="cornerSizeBottomRight">6dp</item>
+    </style>
+
+    <style name="LoadingDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
 </resources>

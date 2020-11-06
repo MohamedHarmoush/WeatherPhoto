@@ -1,12 +1,13 @@
 <resources>
-    <string name="app_name">PhotoWeather</string>
+    <string name="app_name">Photo Weather</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="history_fragment_label">History</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="description_weather_photo">weather photo</string>
+    <string name="description_no_data_image">No data image</string>
+    <string name="txt_no_data_available">No data available</string>
+    <string name="loading">loading…</string>
 </resources>

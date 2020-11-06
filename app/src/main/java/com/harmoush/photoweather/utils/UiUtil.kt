@@ -8,13 +8,13 @@ import androidx.core.content.ContextCompat
 Created by Harmoush on 2020-11-06 
 */
 
-object UiUtils {
+object UiUtil {
     fun showViews(vararg views: View) {
-        views.forEach { view -> view.visibility = View.VISIBLE }
+        views.forEach { view -> view.show() }
     }
 
     fun hideViews(vararg views: View, visibility: Int = View.GONE) {
-        views.forEach { view -> view.visibility = visibility }
+        views.forEach { view -> view.hide(visibility) }
     }
 
     fun getDimen(context: Context, resId: Int): Int {

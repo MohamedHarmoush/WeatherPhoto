@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="currentItem"
+            type="com.harmoush.photoweather.data.source.local.entity.WeatherPhoto" />
+
+        <variable
+            name="listener"
+            type="com.harmoush.photoweather.ui.base.recyclerview.OnItemClickListener" />
+    </data>
+
+    <com.harmoush.photoweather.ui.custom.CustomCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_photo"
+        android:layout_margin="@dimen/margin_10dp"
+        android:onClick="@{(view)->listener.onItemClick(view,currentItem)}}"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardPreventCornerOverlap="false"
+        app:shapeAppearanceOverlay="@style/CustomShapeAppearanceOverlay">
+
+        <ImageView
+            imageUrl="@{currentItem.localPath}"
+            placeholder="@{@drawable/placeholder}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/description_weather_photo"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder" />
+    </com.harmoush.photoweather.ui.custom.CustomCardView>
+</layout>
