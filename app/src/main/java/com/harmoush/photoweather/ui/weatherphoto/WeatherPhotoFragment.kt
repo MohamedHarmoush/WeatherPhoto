@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.TextureView
@@ -137,26 +138,33 @@ class WeatherPhotoFragment : BaseFragment(), UiProvider {
     private fun shareWeatherPhoto() {
         showProgress()
         lifecycleScope.launch {
+            val bitmap = binding.clWeatherPhoto.createBitmap()
             val imageUri = withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
-                val bitmap = binding.clWeatherPhoto.createBitmap()
                 saveImage(bitmap)
             }
             hideProgress()
-            imageUri?.let { shareImageUri(imageUri) }
+            imageUri?.let {
+                viewModel.insertSharedWeatherPhoto()
+                shareImageUri(imageUri)
+            }
         }
     }
 
     private fun saveImage(image: Bitmap): Uri? {
-        //TODO - Should be processed in another thread
-        val imagesFolder = File(context?.cacheDir, SHARED_IMAGES_FOLDER_NAME)
+        val imagesFolder = File(
+            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+            SHARED_IMAGES_FOLDER_NAME
+        )
         var uri: Uri? = null
         try {
             imagesFolder.mkdirs()
-            val file = File(imagesFolder, SHARED_IMAGE_NAME)
+            val file = File(imagesFolder, SHARED_IMAGE_NAME.format(System.currentTimeMillis()))
             val stream = FileOutputStream(file)
             image.compress(CompressFormat.PNG, 100, stream)
             stream.flush()
             stream.close()
+
+            viewModel.sharedFile = file
             uri = FileProvider.getUriForFile(
                 requireContext(), "${requireContext().packageName}.provider", file
             )
@@ -176,7 +184,7 @@ class WeatherPhotoFragment : BaseFragment(), UiProvider {
     }
 
     companion object {
-        private const val SHARED_IMAGE_NAME = "shared_image.png"
+        private const val SHARED_IMAGE_NAME = "shared_image_%s.png"
         private const val SHARED_IMAGES_FOLDER_NAME = "images"
     }
 }

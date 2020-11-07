@@ -34,17 +34,19 @@ class HistoryFragment : BaseFragment() {
     }
 
     override fun observeViewModel() {
-        viewModel.historyListLiveData.observe(viewLifecycleOwner, Observer { res ->
+        viewModel.historyWeatherPhotosResult.observe(viewLifecycleOwner, Observer { res ->
             when (res.status) {
                 LOADING -> {
                     showProgress()
                 }
                 SUCCESS -> {
+                    hideProgress()
                     res?.data?.let {
                         handleSuccessResponse(it)
                     }
                 }
                 ERROR -> {
+                    hideProgress()
                     showMessage(res.message)
                 }
             }

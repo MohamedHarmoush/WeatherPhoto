@@ -3,6 +3,7 @@ package com.harmoush.photoweather.data.source.repository
 import androidx.lifecycle.LiveData
 import com.harmoush.photoweather.data.model.LocationCoordinate
 import com.harmoush.photoweather.data.source.local.entity.WeatherDetails
+import com.harmoush.photoweather.data.source.local.entity.WeatherPhoto
 import com.harmoush.photoweather.data.source.remote.Resource
 import kotlinx.coroutines.CoroutineScope
 
@@ -16,4 +17,11 @@ interface WeatherRepository {
         scope: CoroutineScope,
         coordinate: LocationCoordinate
     ): LiveData<Resource<WeatherDetails>>
+
+    fun insertWeatherPhoto(
+        scope: CoroutineScope,
+        weatherPhoto: WeatherPhoto
+    ): LiveData<Resource<Long>>
+
+    fun getWeatherPhotos(scope: CoroutineScope): LiveData<Resource<List<WeatherPhoto>>>
 }

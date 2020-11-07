@@ -27,7 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/description_weather_photo"
-            android:scaleType="centerCrop"
             android:src="@drawable/placeholder"
             app:shapeAppearanceOverlay="@style/CustomShapeAppearanceOverlay" />
     </com.google.android.material.card.MaterialCardView>
