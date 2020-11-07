@@ -8,4 +8,4 @@ Created by Harmoush on 2020-11-07
 */
 
 @Parcelize
-data class LocationCoordinate(val lon: Float, val lat: Float) : Parcelable
+data class LocationCoordinate(val lon: Double, val lat: Double) : Parcelable

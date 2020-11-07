@@ -109,4 +109,5 @@ dependencies {
     //startActivityForResult but for fragments
     implementation "com.phelat:navigationresult:$navigationresult_version"
 
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
 }

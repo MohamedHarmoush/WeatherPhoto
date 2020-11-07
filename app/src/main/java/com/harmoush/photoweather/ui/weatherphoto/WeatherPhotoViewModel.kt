@@ -13,7 +13,9 @@ Created by Harmoush on 2020-11-07
 
 class WeatherPhotoViewModel(private val weatherRepo: WeatherRepository) : ViewModel() {
 
-    private var coordinateLiveData = MutableLiveData<LocationCoordinate>(null)
+    private val coordinateLiveData by lazy {
+        MutableLiveData<LocationCoordinate>()
+    }
     var weatherDetailsResult: LiveData<Resource<WeatherDetails>> =
         coordinateLiveData.switchMap { coordinate ->
             if (coordinate == null) {
@@ -25,5 +27,9 @@ class WeatherPhotoViewModel(private val weatherRepo: WeatherRepository) : ViewMo
 
     fun getWeatherDetails(coordinate: LocationCoordinate) {
         coordinateLiveData.value = coordinate
+    }
+
+    fun updateUserCurrentLocation(coordinates: LocationCoordinate) {
+        coordinateLiveData.value = coordinates
     }
 }

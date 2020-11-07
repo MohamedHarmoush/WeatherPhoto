@@ -15,7 +15,7 @@ Created by Harmoush on 2020-11-06
 interface WeatherDao : BaseDao<WeatherDetails> {
 
     @Query("SELECT * FROM WeatherDetails WHERE lat =:lat AND lon =:lon")
-    fun getWeatherData(lat: Float, lon: Float): LiveData<WeatherDetails>
+    fun getWeatherData(lat: Double, lon: Double): LiveData<WeatherDetails>
 
     @Insert
     fun insertWeatherPhoto(weatherPhoto: WeatherPhoto): Long

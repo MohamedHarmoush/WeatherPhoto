@@ -2,9 +2,9 @@ package com.harmoush.photoweather.data.source.repository
 
 import androidx.lifecycle.LiveData
 import com.harmoush.photoweather.data.model.LocationCoordinate
-import com.harmoush.photoweather.data.source.local.entity.WeatherDetails
 import com.harmoush.photoweather.data.model.WeatherInfo
 import com.harmoush.photoweather.data.source.local.dao.WeatherDao
+import com.harmoush.photoweather.data.source.local.entity.WeatherDetails
 import com.harmoush.photoweather.data.source.remote.ApiResponse
 import com.harmoush.photoweather.data.source.remote.ApiService
 import com.harmoush.photoweather.data.source.remote.NetworkBoundResource
@@ -26,7 +26,7 @@ class WeatherRepositoryImpl(
     ): LiveData<Resource<WeatherDetails>> {
         return object : NetworkBoundResource<WeatherDetails, WeatherInfo>(scope) {
             override fun saveCallResult(item: WeatherInfo) {
-                weatherDao.insert(WeatherDetails(item))
+                weatherDao.insert(WeatherDetails(item,coordinate))
             }
 
             override fun shouldFetch(data: WeatherDetails?): Boolean {
@@ -38,7 +38,7 @@ class WeatherRepositoryImpl(
             }
 
             override fun createCall(): LiveData<ApiResponse<WeatherInfo>> {
-                return apiService.getWeatherData(coordinate.lat,coordinate.lon)
+                return apiService.getWeatherData(coordinate.lat, coordinate.lon)
             }
 
         }.asLiveData()

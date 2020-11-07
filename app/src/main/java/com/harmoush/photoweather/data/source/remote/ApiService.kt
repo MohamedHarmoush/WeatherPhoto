@@ -13,7 +13,7 @@ interface ApiService {
 
     @GET("data/2.5/weather")
     fun getWeatherData(
-        @Query("lat") latitude: Float,
-        @Query("lon") longitude: Float
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double
     ): LiveData<ApiResponse<WeatherInfo>>
 }
