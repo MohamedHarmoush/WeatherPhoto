@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.harmoush.photoweather.R
 import com.harmoush.photoweather.data.source.local.entity.WeatherPhoto
@@ -67,7 +68,8 @@ class HistoryFragment : BaseFragment() {
     private fun setupRecyclerView() {
         adapter = HistoryAdapter()
         binding.rvHistory.adapter = adapter
-        binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvHistory.layoutManager =
+            GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun handleSuccessResponse(list: List<WeatherPhoto>) {

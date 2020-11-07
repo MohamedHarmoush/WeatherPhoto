@@ -26,6 +26,8 @@
             placeholder="@{@drawable/placeholder}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:contentDescription="@string/description_weather_photo"
             android:src="@drawable/placeholder"
             app:shapeAppearanceOverlay="@style/CustomShapeAppearanceOverlay" />
