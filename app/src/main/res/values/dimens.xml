@@ -5,4 +5,8 @@
     <dimen name="size_no_data_iv">250dp</dimen>
     <dimen name="txt_size_25sp">25sp</dimen>
     <dimen name="card_elevation">2dp</dimen>
+    <dimen name="margin_20dp">25dp</dimen>
+    <dimen name="size_capture_iv">70dp</dimen>
+    <dimen name="margin_60dp">60dp</dimen>
+    <dimen name="txt_size_40sp">40sp</dimen>
 </resources>

@@ -10,4 +10,9 @@
         android:name="com.harmoush.photoweather.ui.history.HistoryFragment"
         android:label="@string/history_fragment_label"
         tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/weatherPhotoFragment"
+        android:name="com.harmoush.photoweather.ui.weatherphoto.WeatherPhotoFragment"
+        android:label="@string/fragment_weather_photo_lable"
+        tools:layout="@layout/fragment_weather_photo" />
 </navigation>

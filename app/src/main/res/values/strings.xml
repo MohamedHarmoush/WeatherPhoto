@@ -12,4 +12,13 @@
     <string name="loading">loading…</string>
     <string name="fab_take_photo_fab_description">Take photo fab description</string>
     <string name="fragment_weather_photo_lable">Capture Photo</string>
+    <string name="description_capture_image_button">Capture image button</string>
+    <string name="sample_temp_text">22°</string>
+    <string name="temp_text">%d°</string>
+    <string name="txt_feels_like">Feels Like</string>
+    <string name="txt_wind_title">Wind</string>
+    <string name="txt_wind">%dkm/h</string>
+    <string name="sample_txt_wind">16km/h</string>
+    <string name="txt_location">I AM HERE\n%s</string>
+    <string name="sample_location">I AM HERE \nAl Maadeyah, EG</string>
 </resources>
