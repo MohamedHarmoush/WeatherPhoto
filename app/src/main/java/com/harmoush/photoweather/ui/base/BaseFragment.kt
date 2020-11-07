@@ -56,7 +56,7 @@ open class BaseFragment : BundleFragment() {
     }
 
     open fun hideProgress() {
-        if (loadingDialog != null && loadingDialog!!.isShowing) {
+        if (isAdded && loadingDialog != null && loadingDialog!!.isShowing) {
             loadingDialog?.dismiss()
             loadingDialog = null
         }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -29,15 +30,29 @@
             android:id="@+id/tv_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20dp"
             android:layout_marginTop="@dimen/margin_60dp"
             android:text="@{@string/temp_text(weather.temp)}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/txt_size_25sp"
             android:textStyle="bold"
             android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintStart_toEndOf="@id/iv_weather_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/sample_temp_text" />
+
+        <ImageView
+            android:id="@+id/iv_weather_icon"
+            imageUrl="@{weather.iconUrl}"
+            placeholder="@{@drawable/sample_weather_icon}"
+            android:layout_width="@dimen/size_weather_icon_iv"
+            android:layout_height="@dimen/size_weather_icon_iv"
+            android:layout_marginStart="@dimen/margin_20dp"
+            android:contentDescription="@string/description_weather_icon"
+            android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_temp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/tv_temp"
+            tools:src="@drawable/sample_weather_icon" />
 
         <TextView
             android:id="@+id/tv_feels_like_title"
@@ -49,8 +64,8 @@
             android:textSize="@dimen/txt_size_25sp"
             android:textStyle="bold"
             android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/tv_temp"
-            app:layout_constraintTop_toBottomOf="@id/tv_temp" />
+            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
+            app:layout_constraintTop_toBottomOf="@id/iv_weather_icon" />
 
         <TextView
             android:id="@+id/tv_feels_like"
@@ -62,8 +77,9 @@
             android:textSize="@dimen/txt_size_25sp"
             android:textStyle="bold"
             android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/tv_temp"
-            app:layout_constraintTop_toBottomOf="@id/tv_feels_like_title" />
+            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
+            app:layout_constraintTop_toBottomOf="@id/tv_feels_like_title"
+            tools:text="@string/sample_temp_text" />
 
         <TextView
             android:id="@+id/tv_wind_title"
@@ -75,7 +91,7 @@
             android:textSize="@dimen/txt_size_25sp"
             android:textStyle="bold"
             android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/tv_temp"
+            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
             app:layout_constraintTop_toBottomOf="@id/tv_feels_like" />
 
         <TextView
@@ -87,8 +103,9 @@
             android:textSize="@dimen/txt_size_25sp"
             android:textStyle="bold"
             android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/tv_temp"
-            app:layout_constraintTop_toBottomOf="@id/tv_wind_title" />
+            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
+            app:layout_constraintTop_toBottomOf="@id/tv_wind_title"
+            tools:text="@string/sample_txt_wind" />
 
         <TextView
             android:id="@+id/tv_location"
@@ -100,8 +117,9 @@
             android:textSize="@dimen/txt_size_25sp"
             android:textStyle="bold"
             android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/tv_temp"
-            app:layout_constraintTop_toBottomOf="@id/tv_wind" />
+            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
+            app:layout_constraintTop_toBottomOf="@id/tv_wind"
+            tools:text="@string/sample_location" />
 
         <ImageView
             android:id="@+id/iv_capture_photo"

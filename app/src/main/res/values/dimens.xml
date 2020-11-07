@@ -9,4 +9,5 @@
     <dimen name="size_capture_iv">70dp</dimen>
     <dimen name="margin_60dp">60dp</dimen>
     <dimen name="txt_size_40sp">40sp</dimen>
+    <dimen name="size_weather_icon_iv">50dp</dimen>
 </resources>
