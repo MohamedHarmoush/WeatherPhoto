@@ -51,10 +51,14 @@ class HistoryFragment : BaseFragment() {
         })
     }
 
+    override fun handleCameraPermissionGranted() {
+        navigate(R.id.weatherPhotoFragment)
+    }
+
     private fun initUi() {
         setupRecyclerView()
         binding.fabTakePhoto.setOnClickListener {
-            navigate(R.id.weatherPhotoFragment)
+            checkCameraPermission()
         }
     }
 

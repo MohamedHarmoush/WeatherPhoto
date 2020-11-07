@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import com.harmoush.photoweather.R
+import java.io.File
 
 /*
 Created by Harmoush on 2020-11-06 
@@ -49,5 +51,11 @@ fun ImageView.loadImage(
         .load(imageUrl)
         .placeholder(placeholderDrawable)
         .error(placeholderDrawable)
+        .into(this)
+}
+
+fun ImageView.loadImage(file: File?) {
+    Glide.with(this)
+        .load(file)
         .into(this)
 }

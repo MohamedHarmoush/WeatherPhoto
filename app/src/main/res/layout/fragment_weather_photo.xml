@@ -14,10 +14,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
 
-        <SurfaceView
-            android:id="@+id/sv_weather_photo"
+        <TextureView
+            android:id="@+id/texture_weather_photo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/description_weather_photo"
@@ -26,111 +27,143 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_60dp"
-            android:text="@{@string/temp_text(weather.temp)}"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt_size_25sp"
-            android:textStyle="bold"
-            android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toEndOf="@id/iv_weather_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/sample_temp_text" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_weather_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_weather_icon"
-            imageUrl="@{weather.iconUrl}"
-            placeholder="@{@drawable/sample_weather_icon}"
-            android:layout_width="@dimen/size_weather_icon_iv"
-            android:layout_height="@dimen/size_weather_icon_iv"
-            android:layout_marginStart="@dimen/margin_20dp"
-            android:contentDescription="@string/description_weather_icon"
-            android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/tv_temp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_temp"
-            tools:src="@drawable/sample_weather_icon" />
+            <ImageView
+                android:id="@+id/iv_captured_photo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/description_weather_captured_photo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_feels_like_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_feels_like"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt_size_25sp"
-            android:textStyle="bold"
-            android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
-            app:layout_constraintTop_toBottomOf="@id/iv_weather_icon" />
+            <TextView
+                android:id="@+id/tv_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_60dp"
+                android:text="@{@string/temp_text(weather.temp)}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_size_25sp"
+                android:textStyle="bold"
+                android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toEndOf="@id/iv_weather_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/sample_temp_text" />
 
-        <TextView
-            android:id="@+id/tv_feels_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{@string/temp_text(weather.feelsLike)}"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt_size_25sp"
-            android:textStyle="bold"
-            android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
-            app:layout_constraintTop_toBottomOf="@id/tv_feels_like_title"
-            tools:text="@string/sample_temp_text" />
+            <ImageView
+                android:id="@+id/iv_weather_icon"
+                imageUrl="@{weather.iconUrl}"
+                placeholder="@{@drawable/sample_weather_icon}"
+                android:layout_width="@dimen/size_weather_icon_iv"
+                android:layout_height="@dimen/size_weather_icon_iv"
+                android:layout_marginStart="@dimen/margin_20dp"
+                android:contentDescription="@string/description_weather_icon"
+                android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_temp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_temp"
+                tools:src="@drawable/sample_weather_icon" />
 
-        <TextView
-            android:id="@+id/tv_wind_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_wind_title"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt_size_25sp"
-            android:textStyle="bold"
-            android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
-            app:layout_constraintTop_toBottomOf="@id/tv_feels_like" />
+            <TextView
+                android:id="@+id/tv_feels_like_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_feels_like"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_size_25sp"
+                android:textStyle="bold"
+                android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
+                app:layout_constraintTop_toBottomOf="@id/iv_weather_icon" />
 
-        <TextView
-            android:id="@+id/tv_wind"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{@string/txt_wind(weather.windSpeed)}"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt_size_25sp"
-            android:textStyle="bold"
-            android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
-            app:layout_constraintTop_toBottomOf="@id/tv_wind_title"
-            tools:text="@string/sample_txt_wind" />
+            <TextView
+                android:id="@+id/tv_feels_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/temp_text(weather.feelsLike)}"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_size_25sp"
+                android:textStyle="bold"
+                android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
+                app:layout_constraintTop_toBottomOf="@id/tv_feels_like_title"
+                tools:text="@string/sample_temp_text" />
 
-        <TextView
-            android:id="@+id/tv_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20dp"
-            android:text="@{@string/txt_location(weather.location)}"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/txt_size_25sp"
-            android:textStyle="bold"
-            android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
-            app:layout_constraintTop_toBottomOf="@id/tv_wind"
-            tools:text="@string/sample_location" />
+            <TextView
+                android:id="@+id/tv_wind_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_wind_title"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_size_25sp"
+                android:textStyle="bold"
+                android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
+                app:layout_constraintTop_toBottomOf="@id/tv_feels_like" />
 
-        <ImageView
-            android:id="@+id/iv_capture_photo"
+            <TextView
+                android:id="@+id/tv_wind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/txt_wind(weather.windSpeed)}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_size_25sp"
+                android:textStyle="bold"
+                android:visibility="@{weather!=null ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
+                app:layout_constraintTop_toBottomOf="@id/tv_wind_title"
+                tools:text="@string/sample_txt_wind" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:text="@{@string/txt_location(weather.location)}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_size_25sp"
+                android:textStyle="bold"
+                android:visibility="@{weather!=null ? View.INVISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toStartOf="@id/iv_weather_icon"
+                app:layout_constraintTop_toBottomOf="@id/tv_wind"
+                tools:text="@string/sample_location" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/btn_capture_photo"
             android:layout_width="@dimen/size_capture_iv"
             android:layout_height="@dimen/size_capture_iv"
             android:layout_marginBottom="@dimen/margin_20dp"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/description_capture_image_button"
+            android:padding="0dp"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_capture_photo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_share_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_20dp"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            android:contentDescription="@string/description_btn_share_photo"
+            android:src="@drawable/ic_share"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

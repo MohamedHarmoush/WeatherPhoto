@@ -7,6 +7,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="description_weather_photo">weather photo</string>
+    <string name="description_weather_captured_photo">weather captured photo</string>
     <string name="description_no_data_image">No data image</string>
     <string name="txt_no_data_available">No data available</string>
     <string name="loading">loading…</string>
@@ -24,4 +25,6 @@
     <string name="description_weather_icon">weather icon</string>
     <string name="external_storage__permission_rationale">You should provide read/write external storage permissions, so the app can save the weather photo.</string>
     <string name="location_permission_rationale">You should provide the location permission, so the app can get weather data.</string>
+    <string name="camera_permission_rationale">You should provide the camera permission, so the app capture images.</string>
+    <string name="description_btn_share_photo">button share photo</string>
 </resources>

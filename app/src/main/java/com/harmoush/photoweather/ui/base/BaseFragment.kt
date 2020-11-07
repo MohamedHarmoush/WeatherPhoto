@@ -45,10 +45,28 @@ open class BaseFragment : BundleFragment(), EasyPermissions.PermissionCallbacks 
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        if (requestCode == RC_LOCATION_PERMISSIONS) {
-            showMessage(getString(R.string.location_permission_rationale))
+        when (requestCode) {
+            RC_LOCATION_PERMISSIONS -> {
+                showMessage(getString(R.string.location_permission_rationale))
+            }
+            RC_CAMERA_PERMISSION -> {
+                showMessage(getString(R.string.camera_permission_rationale))
+            }
+            else -> {
+                showMessage(getString(R.string.external_storage__permission_rationale))
+            }
+        }
+    }
+
+    @AfterPermissionGranted(RC_CAMERA_PERMISSION)
+    fun checkCameraPermission() {
+        if (EasyPermissions.hasPermissions(requireContext(), android.Manifest.permission.CAMERA)) {
+            handleCameraPermissionGranted()
         } else {
-            showMessage(getString(R.string.external_storage__permission_rationale))
+            val rationale = getString(R.string.camera_permission_rationale)
+            EasyPermissions.requestPermissions(
+                this, rationale, RC_CAMERA_PERMISSION, android.Manifest.permission.CAMERA
+            )
         }
     }
 
@@ -63,6 +81,10 @@ open class BaseFragment : BundleFragment(), EasyPermissions.PermissionCallbacks 
                 this, rationale, RC_LOCATION_PERMISSIONS, *locationPermissions
             )
         }
+    }
+
+    open fun handleCameraPermissionGranted() {
+
     }
 
     open fun handleGetUserLocation() {
@@ -107,6 +129,7 @@ open class BaseFragment : BundleFragment(), EasyPermissions.PermissionCallbacks 
 
     companion object {
         private const val RC_LOCATION_PERMISSIONS = 3003
+        private const val RC_CAMERA_PERMISSION = 7007
         private const val RC_EXTERNAL_STORAGE_PERMISSIONS = 3004
     }
 }
