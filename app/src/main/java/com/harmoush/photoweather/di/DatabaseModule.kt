@@ -15,5 +15,5 @@ val databaseModule = module {
             .build()
     }
 
-    single { get<WeatherDatabase>().sampleDao() }
+    single { get<WeatherDatabase>().weatherDao() }
 }

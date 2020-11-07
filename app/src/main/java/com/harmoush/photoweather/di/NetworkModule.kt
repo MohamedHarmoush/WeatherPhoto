@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.harmoush.photoweather.BuildConfig
 import com.harmoush.photoweather.data.source.remote.ApiService
 import com.harmoush.photoweather.data.source.remote.LiveDataCallAdapterFactory
+import com.harmoush.photoweather.data.source.remote.WeatherInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 Created by Harmoush on 2020-11-06 
 */
 
-val retrofitModule = module {
+val networkModule = module {
 
     single { okHttp() }
     single { retrofit(get()) }
@@ -33,6 +34,7 @@ private fun retrofit(client: OkHttpClient): Retrofit {
         .addCallAdapterFactory(LiveDataCallAdapterFactory())
         .build()
 }
+
 private val requestBodyLoggerInterceptor: Interceptor
     get() = HttpLoggingInterceptor().apply {
         level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
@@ -46,6 +48,7 @@ private val requestHeaderLoggerInterceptor: Interceptor
     }
 
 private fun okHttp() = OkHttpClient.Builder()
+    .addInterceptor(WeatherInterceptor())
     .addInterceptor(requestBodyLoggerInterceptor)
     .addInterceptor(requestHeaderLoggerInterceptor)
     .build()

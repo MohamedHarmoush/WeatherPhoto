@@ -1,4 +1,6 @@
-package com.voctag.android.model
+package com.harmoush.photoweather.data.source.remote
+
+import com.voctag.android.model.Status
 
 
 /*

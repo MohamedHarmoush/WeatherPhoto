@@ -1,6 +1,7 @@
 package com.harmoush.photoweather.ui.base
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.harmoush.photoweather.ui.MainActivity
@@ -20,6 +21,15 @@ open class BaseFragment : BundleFragment() {
         getToolbarTitle()?.let {
             getMainActivity()?.setToolbarTitle(it)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
+    }
+
+    open fun observeViewModel() {
+
     }
 
     fun navigate(action: Int, bundle: Bundle? = null) {

@@ -33,25 +33,7 @@ class HistoryFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun initUi() {
-        setupRecyclerView()
-        binding.fabTakePhoto.setOnClickListener {
-            navigate(R.id.weatherPhotoFragment)
-        }
-    }
-
-    private fun setupRecyclerView() {
-        adapter = HistoryAdapter()
-        binding.rvHistory.adapter = adapter
-        binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        observeViewModel()
-    }
-
-    private fun observeViewModel() {
+    override fun observeViewModel() {
         viewModel.historyListLiveData.observe(viewLifecycleOwner, Observer { res ->
             when (res.status) {
                 LOADING -> {
@@ -67,6 +49,19 @@ class HistoryFragment : BaseFragment() {
                 }
             }
         })
+    }
+
+    private fun initUi() {
+        setupRecyclerView()
+        binding.fabTakePhoto.setOnClickListener {
+            navigate(R.id.weatherPhotoFragment)
+        }
+    }
+
+    private fun setupRecyclerView() {
+        adapter = HistoryAdapter()
+        binding.rvHistory.adapter = adapter
+        binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun handleSuccessResponse(list: List<WeatherPhoto>) {
