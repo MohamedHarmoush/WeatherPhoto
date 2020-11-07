@@ -13,11 +13,14 @@ import android.util.Size
 import android.view.Surface
 import android.view.TextureView.SurfaceTextureListener
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.harmoush.photoweather.R
 import com.harmoush.photoweather.ui.weatherphoto.camera.CameraInteractionListener
 import com.harmoush.photoweather.ui.weatherphoto.camera.UiProvider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -27,6 +30,7 @@ import java.util.*
 class CustomCameraManager(
     private val context: Context,
     private val lifecycle: Lifecycle,
+    private val coroutineScope: LifecycleCoroutineScope,
     private val uiProvider: UiProvider,
     private val cameraInteractionListener: CameraInteractionListener
 ) : LifecycleObserver {
@@ -144,7 +148,7 @@ class CustomCameraManager(
                 cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
             captureRequestBuilder!!.addTarget(previewSurface)
 
-            cameraDevice!!.createCaptureSession(
+            cameraDevice?.createCaptureSession(
                 listOf(previewSurface), object : CameraCaptureSession.StateCallback() {
                     override fun onConfigured(cameraCaptureSession: CameraCaptureSession) {
                         if (cameraDevice == null) {
@@ -192,27 +196,31 @@ class CustomCameraManager(
         }
     }
 
-    fun onPhotoCaptureClicked() {
-        var outputPhoto: FileOutputStream? = null
-        var errorMessage: String? = null
-        try {
-            imageFile = createImageFile(createImageGallery())
-            outputPhoto = FileOutputStream(imageFile)
-            uiProvider.textureView.bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputPhoto)
-        } catch (e: Exception) {
-            errorMessage = e.localizedMessage
-            Log.e(TAG, "${e.message}")
-        } finally {
+    fun capturePhoto() {
+        coroutineScope.launch(Dispatchers.IO) {
+            var outputPhoto: FileOutputStream? = null
+            var errorMessage: String? = null
             try {
-                outputPhoto?.close()
-            } catch (e: IOException) {
-                Log.e(TAG, "${e.message}")
+                imageFile = createImageFile(createImageGallery())
+                outputPhoto = FileOutputStream(imageFile)
+                uiProvider.textureView.bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputPhoto)
+            } catch (e: Exception) {
                 errorMessage = e.localizedMessage
-            }
-            if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED) && imageFile != null) {
-                cameraInteractionListener.onPhotoCaptureSuccess(imageFile)
-            } else {
-                cameraInteractionListener.onPhotoCaptureFailure(errorMessage)
+                Log.e(TAG, "${e.message}")
+            } finally {
+                try {
+                    outputPhoto?.close()
+                } catch (e: IOException) {
+                    Log.e(TAG, "${e.message}")
+                    errorMessage = e.localizedMessage
+                }
+                coroutineScope.launch(Dispatchers.Main) {
+                    if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED) && imageFile != null) {
+                        cameraInteractionListener.onPhotoCaptureSuccess(imageFile)
+                    } else {
+                        cameraInteractionListener.onPhotoCaptureFailure(errorMessage)
+                    }
+                }
             }
         }
     }

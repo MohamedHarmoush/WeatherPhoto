@@ -1,13 +1,15 @@
 package com.harmoush.photoweather.utils
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
-import com.harmoush.photoweather.R
 import java.io.File
 
 /*
@@ -40,6 +42,24 @@ fun View.hide(visibility: Int = View.GONE) {
 
 fun View.show() {
     visibility = View.VISIBLE
+}
+
+fun View.createBitmap(): Bitmap {
+    layoutParams = ConstraintLayout.LayoutParams(
+        ConstraintLayout.LayoutParams.MATCH_PARENT,
+        ConstraintLayout.LayoutParams.MATCH_PARENT
+    )
+    val dm = resources.displayMetrics
+    measure(
+        View.MeasureSpec.makeMeasureSpec(dm.widthPixels, View.MeasureSpec.EXACTLY),
+        View.MeasureSpec.makeMeasureSpec(dm.heightPixels, View.MeasureSpec.EXACTLY)
+    )
+    layout(0, 0, measuredWidth, measuredHeight)
+    val bitmap = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    layout(left, top, right, bottom)
+    draw(canvas)
+    return bitmap
 }
 
 @BindingAdapter("imageUrl", "placeholder", requireAll = false)
