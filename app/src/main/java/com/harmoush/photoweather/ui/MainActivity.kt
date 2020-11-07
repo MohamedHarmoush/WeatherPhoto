@@ -6,25 +6,20 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.harmoush.photoweather.R
 import com.harmoush.photoweather.databinding.ActivityMainBinding
-import com.harmoush.photoweather.utils.snakeBar
 import com.phelat.navigationresult.FragmentResultActivity
 
 class MainActivity : FragmentResultActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupActionBar(binding)
-
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            view.snakeBar("Replace with your own action")
-        }
+        initUi()
     }
 
     override fun getNavHostFragmentId(): Int {
@@ -35,7 +30,15 @@ class MainActivity : FragmentResultActivity() {
         return getNavController().navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun setupActionBar(binding: ActivityMainBinding) {
+    fun setToolbarTitle(title: String) {
+        binding.toolbar.title = title
+    }
+
+    private fun initUi() {
+        setupActionBar()
+    }
+
+    private fun setupActionBar() {
         setSupportActionBar(binding.toolbar)
         val navController = getNavController()
         appBarConfiguration = AppBarConfiguration(navController.graph)

@@ -10,4 +10,6 @@
     <string name="description_no_data_image">No data image</string>
     <string name="txt_no_data_available">No data available</string>
     <string name="loading">loading…</string>
+    <string name="fab_take_photo_fab_description">Take photo fab description</string>
+    <string name="fragment_weather_photo_lable">Capture Photo</string>
 </resources>

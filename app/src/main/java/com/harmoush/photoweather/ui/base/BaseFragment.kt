@@ -15,6 +15,13 @@ open class BaseFragment : BundleFragment() {
 
     private var loadingDialog: LoadingDialog? = null
 
+    override fun onStart() {
+        super.onStart()
+        getToolbarTitle()?.let {
+            getMainActivity()?.setToolbarTitle(it)
+        }
+    }
+
     fun navigate(action: Int, bundle: Bundle? = null) {
         findNavController().navigate(action, bundle)
     }
@@ -44,4 +51,6 @@ open class BaseFragment : BundleFragment() {
             loadingDialog = null
         }
     }
+
+    open fun getToolbarTitle(): String? = null
 }

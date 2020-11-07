@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.harmoush.photoweather.R
 import com.harmoush.photoweather.data.source.local.entity.WeatherPhoto
 import com.harmoush.photoweather.databinding.FragmentHistoryBinding
 import com.harmoush.photoweather.ui.base.BaseFragment
@@ -34,6 +35,9 @@ class HistoryFragment : BaseFragment() {
 
     private fun initUi() {
         setupRecyclerView()
+        binding.fabTakePhoto.setOnClickListener {
+            navigate(R.id.weatherPhotoFragment)
+        }
     }
 
     private fun setupRecyclerView() {
